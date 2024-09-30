@@ -163,3 +163,135 @@ try{
 }catch(error){
     console.log("Se ha producido un error:",error);
 }
+
+/**
+ * Bucles
+ */
+
+let listaTareas: Tarea[] = [
+    {
+        nombre: "Tarea 1",
+        prioridad: 2,
+        estado: EstadoTarea.Enproceso
+    },
+    {
+        nombre: "Tarea 2",
+        prioridad: 2,
+        estado: EstadoTarea.Pendiente
+    },
+    {
+        nombre: "Tarea 3",
+        prioridad: 2,
+        estado: EstadoTarea.Terminado
+    }
+]
+
+//For-each
+listaTareas.forEach(
+    (tarea: Tarea, index: Number) => {
+        console.log(`${tarea} - ${index}`)
+    }
+)
+
+//For
+for (let index = 0; index < listaTareas.length; index++) {
+    const tarea = listaTareas[index];
+    console.log(`${tarea.nombre} - ${index}`)
+}
+
+//While
+while(tarea1.estado != EstadoTarea.Terminado){
+    tarea1.prioridad ++;
+    if(tarea1.prioridad == 5){
+        tarea1.estado = EstadoTarea.Terminado;
+    }
+}
+
+tarea1.prioridad = 1;
+
+//Do-While
+do {
+    tarea1.prioridad ++;
+    if(tarea1.prioridad == 5){
+        tarea1.estado = EstadoTarea.Terminado;
+    }
+} while(tarea1.estado != EstadoTarea.Terminado);
+
+/**
+ * -------------------------------------------------------------
+ * FUNCIONES
+ * -------------------------------------------------------------
+ */
+
+//Funciones sin parametros
+function saludar() {
+
+    let nombre:String = "Alejandro";
+
+    console.log(`Hola ${nombre}`);
+}
+
+saludar();
+
+//Funciones con parametros
+function saludarPersona(nombre:String){ //Para poner varios parametros los separamos por comas
+    console.log(`Hola ${nombre}`)
+}
+
+saludarPersona("Alejandro");
+
+//Funciones con parametros por defecto
+function despedirPersona(nombre:String = "Pepe"){ 
+    console.log(`Adios ${nombre}`);
+}
+
+despedirPersona();
+
+//Funcion con parametros opcionales
+function despedidaOpcional(nombre?:String){
+    if(nombre){
+        console.log(`Adios ${nombre}`);
+    } else {
+        console.log(`Adios`);
+    }
+}
+
+//Funciones con varios tipos
+function ejemploVariosTipos(a: String | number){
+    if(typeof(a) == "string"){
+        console.log(`Tu parametro es de tipo string`);
+    } else {
+        console.log(`Tu parametro es de tipo number`);
+    }
+}
+
+//Funciones que devuelven valores
+function ejemploReturn():String{
+    let nombre:String = "Alejandro";
+
+    return nombre;
+}
+
+let nombre1:String = ejemploReturn();
+console.log(nombre1);
+
+//Funciones con multiples parametros
+function ejemploMultiplesParams(...nombres:String[]){
+    nombres.forEach((nombre:String) => {
+        console.log(nombre);
+    });
+}
+
+ejemploMultiplesParams("Alejandro", "juan", "Jose");
+
+//Funciones Flecha
+
+let empleado:Empleado = {
+    nombre:"Alejandro",
+    edad: 20,
+    sueldo: 15000
+}
+
+const mostrarEmpleado = (empleado:Empleado) => `${empleado.nombre} tiene ${empleado.edad} anios`
+
+mostrarEmpleado(empleado);
