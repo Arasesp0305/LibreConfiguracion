@@ -295,3 +295,34 @@ let empleado:Empleado = {
 const mostrarEmpleado = (empleado:Empleado) => `${empleado.nombre} tiene ${empleado.edad} anios`
 
 mostrarEmpleado(empleado);
+
+//Llamada a una API
+
+type University = {
+    domains:string[],
+    alpha_two_code:string,
+    web_pages:string[],
+    name:string,
+}
+
+async function getDataUniversity():Promise<University []>{
+
+    const data = await fetch("http://universities.hipolabs.com/search?country=Spain");
+    let respuesta:Promise<University[]> = await data.json() as Promise<University[]>;
+    return respuesta;
+
+}
+
+getDataUniversity().then((data:University[]) => {
+    let contador:number = 0
+    data.forEach(
+        (universidad) => {
+            contador++;
+            console.log("\n\n")
+            console.log(`Universidad número ${contador}`)
+            console.log(`Nombre: ${universidad.name}`)
+            console.log(`Dominios: ${universidad.domains}`)
+            console.log(`Paginas web: ${universidad.web_pages}`)
+        }
+    )
+});
