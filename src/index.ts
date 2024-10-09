@@ -347,7 +347,7 @@ async function* obtenerDatosWeb(): AsyncGenerator<WebPage>{
 }
 
 //Ejercicio 2
-function ejercicio2(type:String = "SessionStorage", key:string, data:Tarea[]){
+function ejercicio2(type:String = "session", key:string, data:Tarea[]){
     console.log("Se ha entrado en el metodo")
     if(type == "session"){
         sessionStorage.setItem(key, data.toString());
@@ -381,3 +381,54 @@ let arrayTarea:Tarea[] = [ejemplo1, ejemplo2, ejemplo3];
 
 ejercicio2("session", "datos", arrayTarea);
 ejercicio2("local", "datos", arrayTarea);
+
+//Ejercicio 4
+function ejercicio4(type:string = "session", key:string):string|null{
+    let temporal:string|null;
+
+    if(type == "session"){
+        temporal = sessionStorage.getItem(key);
+    }else if(type == "local"){
+        temporal = localStorage.getItem(key);
+    }else{
+        temporal = null;
+    }
+
+    return temporal;
+}
+
+//Ejercicio 5
+function ejercicio5(type:string = "session"){
+
+    if(type == "session"){
+        sessionStorage.array.forEach((elemento:string) => {
+            console.log(elemento);
+        });
+    }else if(type == "local"){
+        localStorage.array.forEach((elemento:string) => {
+            console.log(elemento);
+        });
+    }else{
+        console.log("Tipo incorrecto, introduzca \"session\" o \"local\"")
+    }
+}
+
+ejercicio5("session");
+ejercicio5("local");
+
+//Ejercicio 6
+function ejercicio6(type:string = "session", key:string){
+
+    if(type == "session"){
+        sessionStorage.removeItem(key);
+    }else if(type == "local"){
+        localStorage.removeItem(key);
+    }else{
+        console.log("Tipo incorrecto, introduzca \"session\" o \"local\"")
+    }
+}
+
+ejercicio6("session", "datos");
+ejercicio6("local", "datos");
+
+//Ejercicio 7
