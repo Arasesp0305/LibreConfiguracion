@@ -297,6 +297,8 @@ const mostrarEmpleado = (empleado:Empleado) => `${empleado.nombre} tiene ${emple
 mostrarEmpleado(empleado);
 
 //Llamada a una API
+/**
+ * 
 
 type University = {
     domains:string[],
@@ -326,3 +328,56 @@ getDataUniversity().then((data:University[]) => {
         }
     )
 });
+
+ */
+
+type WebPage = {
+    Name:string,
+    Domain:string,
+    Descryption:string
+}
+
+async function* obtenerDatosWeb(): AsyncGenerator<WebPage>{
+    let petition = await fetch("https://haveibeenpwned.com/api/v2/breaches");
+    let datos = await petition.json() as WebPage[];
+
+    for (let i = 0; i < datos.length; i++){
+        yield datos[i];
+    }
+}
+
+//Ejercicio 2
+function ejercicio2(type:String = "SessionStorage", key:string, data:Tarea[]){
+    console.log("Se ha entrado en el metodo")
+    if(type == "session"){
+        sessionStorage.setItem(key, data.toString());
+        console.log("Datos guardados en SessionStorage");
+    } else if (type == "local"){
+        localStorage.setItem(key, data.toString());
+        console.log("Datos guardados en LocalStorage");
+    }
+}
+
+//Ejercicio 3
+let ejemplo1:Tarea = {
+    nombre: "Tarea1",
+    prioridad: 1,
+    estado: EstadoTarea.Enproceso 
+}
+
+let ejemplo2:Tarea = {
+    nombre: "Tarea2",
+    prioridad: 2,
+    estado: EstadoTarea.Pendiente
+}
+
+let ejemplo3:Tarea = {
+    nombre: "Tarea3",
+    prioridad: 3,
+    estado: EstadoTarea.Terminado
+}
+
+let arrayTarea:Tarea[] = [ejemplo1, ejemplo2, ejemplo3];
+
+ejercicio2("session", "datos", arrayTarea);
+ejercicio2("local", "datos", arrayTarea);
