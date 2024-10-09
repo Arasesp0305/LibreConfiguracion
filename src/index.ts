@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 console.log("Hola Mundo");
 
 /**
@@ -350,10 +352,10 @@ async function* obtenerDatosWeb(): AsyncGenerator<WebPage>{
 function ejercicio2(type:String = "session", key:string, data:Tarea[]){
     console.log("Se ha entrado en el metodo")
     if(type == "session"){
-        sessionStorage.setItem(key, data.toString());
+        sessionStorage.setItem(key, JSON.stringify(data));
         console.log("Datos guardados en SessionStorage");
     } else if (type == "local"){
-        localStorage.setItem(key, data.toString());
+        localStorage.setItem(key, JSON.stringify(data));
         console.log("Datos guardados en LocalStorage");
     }
 }
@@ -398,23 +400,9 @@ function ejercicio4(type:string = "session", key:string):string|null{
 }
 
 //Ejercicio 5
-function ejercicio5(type:string = "session"){
 
-    if(type == "session"){
-        sessionStorage.array.forEach((elemento:string) => {
-            console.log(elemento);
-        });
-    }else if(type == "local"){
-        localStorage.array.forEach((elemento:string) => {
-            console.log(elemento);
-        });
-    }else{
-        console.log("Tipo incorrecto, introduzca \"session\" o \"local\"")
-    }
-}
-
-ejercicio5("session");
-ejercicio5("local");
+console.log(ejercicio4("session", "datos"));
+console.log(ejercicio4("local", "datos"));
 
 //Ejercicio 6
 function ejercicio6(type:string = "session", key:string){
@@ -431,4 +419,19 @@ function ejercicio6(type:string = "session", key:string){
 ejercicio6("session", "datos");
 ejercicio6("local", "datos");
 
+console.log(ejercicio4("session", "datos"));
+console.log(ejercicio4("local", "datos"));
+
+
 //Ejercicio 7
+Cookies.set("nombre", "Alejandro", {expires:7, path:"/"})
+Cookies.set("apellido", "Rasero Espinosa", {expires:2})
+Cookies.set("email", "alexrasero15@gmail.com", {expires:4})
+
+console.log(Cookies.get("nombre"));
+console.log(Cookies.get("apellido"));
+console.log(Cookies.get("email"));
+
+Cookies.remove("nombre");
+Cookies.remove("apellidos");
+Cookies.remove("email");
